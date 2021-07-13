@@ -16,6 +16,7 @@
   "rules": {
     "lines-between-class-members" : ["error", "always"],
     "no-return-await": "error",
-    "require-await": "error"
+    "require-await": "error",
+    "no-shadow": "off"
   }
 }

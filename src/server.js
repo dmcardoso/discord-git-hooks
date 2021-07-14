@@ -13,10 +13,6 @@ app.post('/branchs', (request, response) => {
   return response.send('branchs');
 });
 
-app.post('/forks', (request, response) => {
-  return response.send('forks');
-});
-
 app.post('/pull-requests', (request, response) => {
   return response.send('pull-requests');
 });

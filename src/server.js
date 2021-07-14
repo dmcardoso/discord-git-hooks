@@ -56,14 +56,6 @@ app.post('/branchs', async (request, response) => {
   return response.status(204);
 });
 
-app.post('/forks', (request, response) => {
-  return response.send('forks');
-});
-
-app.post('/pull-requests', (request, response) => {
-  return response.send('pull-requests');
-});
-
 app.post('/stars', async (request, response) => {
   const {
     body: { action, repository, sender, starred_at: starredAt },

@@ -14,8 +14,46 @@ app.get('/', (request, response) => {
   });
 });
 
-app.post('/branchs', (request, response) => {
-  return response.send('branchs');
+app.post('/branchs', async (request, response) => {
+  const {
+    body: { ref_type: refType, ref, repository, sender },
+  } = request;
+
+  if (refType === 'branch') {
+    const embed = new Discord.MessageEmbed()
+      .setTitle(`New branch ${ref} on ${repository.name}!`)
+      .setDescription(
+        `${sender.login} created a new branch on ${repository.name}, check it out ${repository.html_url}/tree/${ref}`,
+      )
+      .setURL(repository.html_url)
+      .setFooter(repository.full_name)
+      .setThumbnail(sender.avatar_url)
+      .setColor('RANDOM')
+      .addFields([
+        {
+          name: 'Repository description',
+          value: repository.description,
+        },
+        {
+          name: 'Repository stars count',
+          value: repository.stargazers_count,
+        },
+        {
+          name: 'Repository language',
+          value: repository.language,
+        },
+        {
+          name: 'Repository open issues',
+          value: repository.open_issues,
+        },
+      ])
+      .setTimestamp();
+
+    const channel = await client.channels.fetch(process.env.CHANNEL_ID);
+    await channel.send('@everyone 👀 new branch!! 👀', embed);
+  }
+
+  return response.status(204);
 });
 
 app.post('/forks', (request, response) => {
@@ -64,6 +102,7 @@ app.post('/stars', async (request, response) => {
     const channel = await client.channels.fetch(process.env.CHANNEL_ID);
     await channel.send('@everyone 🎉 🎉 new star!! 🎉 🎉', embed);
   }
+
   return response.status(204);
 });
 

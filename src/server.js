@@ -14,7 +14,7 @@ app.get('/', (request, response) => {
   });
 });
 
-app.post('/branchs', async (request, response) => {
+app.post('/branches', async (request, response) => {
   const {
     body: { ref_type: refType, ref, repository, sender },
   } = request;
@@ -54,14 +54,6 @@ app.post('/branchs', async (request, response) => {
   }
 
   return response.status(204);
-});
-
-app.post('/forks', (request, response) => {
-  return response.send('forks');
-});
-
-app.post('/pull-requests', (request, response) => {
-  return response.send('pull-requests');
 });
 
 app.post('/stars', async (request, response) => {

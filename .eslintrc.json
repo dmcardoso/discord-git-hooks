@@ -17,6 +17,7 @@
     "lines-between-class-members" : ["error", "always"],
     "no-return-await": "error",
     "require-await": "error",
-    "no-shadow": "off"
+    "no-shadow": "off",
+    "class-methods-use-this": "off"
   }
 }

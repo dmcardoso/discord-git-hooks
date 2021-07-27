@@ -7,6 +7,8 @@ class StarsController {
     } = request;
 
     if (action === 'created') {
+      console.log(`[github]: new star by ${sender.login}`);
+
       const embed = DiscordService.buildStarsMessage({
         repository,
         sender,
@@ -17,10 +19,12 @@ class StarsController {
         request.discord,
         '@everyone 🎉 🎉 new star!! 🎉 🎉',
         embed,
-      );
+      ).then(() => {
+        console.log('[discord]: new star message sent to channel');
+      });
     }
 
-    return response.status(204);
+    return response.status(204).send();
   }
 }
 

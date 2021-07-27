@@ -7,6 +7,7 @@ class BranchesController {
     } = request;
 
     if (refType === 'branch') {
+      console.log(`[github]: new branch by ${sender.login}`);
       const embed = DiscordService.buildBranchesMessage({
         ref,
         repository,
@@ -17,10 +18,12 @@ class BranchesController {
         request.discord,
         '@everyone 👀 new branch!! 👀',
         embed,
-      );
+      ).then(() => {
+        console.log('[discord]: new branch message sent to channel');
+      });
     }
 
-    return response.status(204);
+    return response.status(204).send();
   }
 }
 

@@ -17,13 +17,14 @@ class Application {
   middlewares() {
     this.app.use(express.json());
 
-    this.app.use('*', (request) => {
+    this.app.use('*', (request, response, next) => {
       request.discord = this.discord;
+      next();
     });
   }
 
   routes() {
-    this.app.use(routes);
+    this.app.use('/', routes);
   }
 
   start() {
